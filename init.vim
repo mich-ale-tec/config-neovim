@@ -1,4 +1,12 @@
 call plug#begin('~/.vim/plugged')
+" Plug LSP
+Plug 'neovim/nvim-lspconfig'
+" Plug Autocompletado Go
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug Snippets Go
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 "Plug tema
 Plug 'sainnhe/sonokai'
 Plug 'morhetz/gruvbox'
@@ -329,3 +337,5 @@ set list "Muestra los tabuladores y fin de lineas
 set nopaste "Aplicar la sangria a elementos pegados
 " Path de python3 para windows
 let g:python3_host_prog = '~/myenv/bin/python3'
+" Importar
+lua require('go')
