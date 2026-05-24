@@ -114,6 +114,12 @@ Plug 'jreybert/vimagit'
 "Plug editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
+" Plugin principal para Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Soporte mejorado para LSP de Go
+Plug 'ray-x/lsp_signature.nvim'
+
 call plug#end()
 
 "Configuracion de tema de everforest
@@ -136,7 +142,7 @@ set background=dark
 
 colorscheme everforest
 
-"Configuracion de resaltado de sintaxis
+"Configuracion de resaltado de sintaxis [ANALIZAR: MANTENIMIENTO]
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
@@ -255,6 +261,40 @@ let g:startify_lists = [
     \ { 'type': 'sessions',  'header': ['   Sessions']       },
     \ ]
 
+" ========== CONFIGURACIÓN DE GO EN VIM-GO ==========
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+
+" Configurar formato automático
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+
+" Usar gopls como LSP
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+" Configuración de linting con golangci-lint
+let g:go_linters_enabled = ['golint', 'errcheck']
+
+" Atajos de teclado para Go
+autocmd FileType go nmap <buffer> <Leader>gr <Plug>(go-run)
+autocmd FileType go nmap <buffer> <Leader>gt <Plug>(go-test)
+autocmd FileType go nmap <buffer> <Leader>gb <Plug>(go-build)
+autocmd FileType go nmap <buffer> <Leader>gc <Plug>(go-coverage)
+autocmd FileType go nmap <buffer> <Leader>gi <Plug>(go-imports)
+autocmd FileType go nmap <buffer> gd <Plug>(go-def-tab)
+
+" Configuración de ALE para Go
+let g:ale_fixers.go = ['goimports', 'remove_trailing_lines', 'trim_whitespace']
+
+" Indentación especial para Go (tabs en lugar de espacios)
+autocmd FileType go setlocal noexpandtab sw=4 ts=4 sts=4
+
 "Configuracion de mapeo
 let mapleader=" "
 "Configuracion de npm a map por los errores que se presentaron
@@ -290,6 +330,7 @@ nmap <Leader>gp <Plug>(GitGutterPrevHunk)
 " Abrir el vim magit
 nnoremap <leader>gs :Magit<CR>
 
+" Atajo de ESC en INSERT
 inoremap jk <ESC>
 inoremap <C-C> <ESC>
 
@@ -304,9 +345,6 @@ nnoremap <M-j>  :resize -2<CR>
 nnoremap <M-k>  :resize +2<CR>
 nnoremap <M-h>  :vertical resize -2<CR>
 nnoremap <M-l>  :vertical resize +2<CR>
-
-"Configuracion de formatear en C++
-map <Leader>k :pyf <path-to-this-file>/clang-format.py<cr>
 
 "Configuracion de neovim
 syntax on "Coloreado de sintaxis
@@ -335,7 +373,4 @@ set laststatus=2 "Mostrar la linea de estado siempre
 set hlsearch "Habilitado el coloreado de busqueda
 set list "Muestra los tabuladores y fin de lineas
 set nopaste "Aplicar la sangria a elementos pegados
-" Path de python3 para windows
-let g:python3_host_prog = '~/myenv/bin/python3'
-" Importar
-lua require('go')
+
