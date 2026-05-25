@@ -58,7 +58,7 @@ vim.keymap.set("n", "K", function()
 	})
 end, opts)
 
-vim.keymap.set({ "n", "i" }, "<C-k>", function()
+vim.keymap.set({ "n", "i" }, "<C-t>", function()
 	vim.lsp.buf.signature_help({
 		border = "rounded",
 	})
