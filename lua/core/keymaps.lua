@@ -32,14 +32,9 @@ map("n", "<M-l>", ":vertical resize +2<CR>", opts)
 -- =========================
 -- TREE
 -- =========================
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", {
-	silent = true,
-	desc = "Explorer",
-})
-
-map("n", "<leader>fe", "<cmd>NvimTreeFindFile<CR>", {
-	silent = true,
-	desc = "Find current file",
+map("n", "<S-e>", "<cmd>Neotree toggle<cr>", { desc = "Explorer" })
+map("n", "<leader>fe", "<cmd>Neotree reveal<cr>", {
+	desc = "Reveal file in explorer",
 })
 -- =========================
 -- LSP

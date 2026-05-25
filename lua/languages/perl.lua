@@ -2,39 +2,29 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local map = vim.keymap.set
 
--- Grupo para Perl
 local perl_group = augroup("PerlConfig", { clear = true })
 
--- ============ AUTOCOMANDOS ESPECÍFICOS DE PERL ============
 autocmd("FileType", {
 	group = perl_group,
 	pattern = "perl",
 	callback = function()
-		-- Perl estándar: 4 espacios
+		-- =========================
+		-- INDENTACIÓN ESTÁNDAR PERL
+		-- =========================
 		vim.opt_local.tabstop = 4
-		vim.opt_local.softtabstop = 4
 		vim.opt_local.shiftwidth = 4
+		vim.opt_local.softtabstop = 4
 		vim.opt_local.expandtab = true
 
-		-- Habilitar TreeSitter highlighting (si está disponible)
-		vim.treesitter.start()
+		-- =========================
+		-- KEYMAPS
+		-- =========================
+		local opts = { buffer = true, silent = true }
 
-		-- Keymaps específicos
-		local opts = { noremap = true, silent = true, buffer = true }
-
-		-- Ejecutar script con Perl
+		-- ejecutar script Perl
 		map("n", "<F5>", ":!perl %<CR>", opts)
 
-		-- Mostrar errores
-		map("n", "<C-l>", ":ALEDetail<CR>", opts)
+		-- mostrar diagnósticos LSP (si existe)
+		map("n", "<leader>e", vim.diagnostic.open_float, opts)
 	end,
 })
-
--- ============ PERL-SPECIFIC HIGHLIGHTING ============
--- vim-perl ya proporciona highlighting avanzado
-vim.g.perl_fold = 1 -- Descomenta si quieres folding
--- vim.g.perl_fold_blocks = 1
-
--- ============ PERLCRITIC (LINTING) ============
--- vim.g.ale_perl_perlcritic_showrules = 1
--- Configurable a través de ~/.perlcriticrc
