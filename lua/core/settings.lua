@@ -1,59 +1,60 @@
--- ============ OPCIONES GENERALES ============
-vim.opt.compatible = false          -- No compatible con Vi antiguo
-vim.opt.encoding = 'utf-8'          -- Codificación UTF-8
-vim.opt.fileencoding = 'utf-8'
+-- =========================
+-- UI BASICA
+-- =========================
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 2
+vim.opt.cursorline = true
+vim.opt.ruler = true
+vim.opt.laststatus = 3 -- mejor que 2 (global statusline)
 
--- ============ INTERFAZ ============
-vim.opt.number = true               -- Mostrar números de línea
-vim.opt.relativenumber = true       -- Números relativos
-vim.opt.numberwidth = 1             -- Ancho del gutter de números
-vim.opt.cursorline = true           -- Resaltar línea actual
-vim.opt.cursorcolumn = true         -- Resaltar columna actual
-vim.opt.ruler = true                -- Mostrar posición en barra inferior
-vim.opt.showcmd = true              -- Mostrar comandos incompletos
-vim.opt.showmatch = true            -- Resaltar paréntesis/corchetes matching
-vim.opt.laststatus = 2              -- Barra de estado siempre visible
+-- =========================
+-- MOUSE
+-- =========================
+vim.opt.mouse = "a"
 
--- ============ MODO ============
-vim.opt.showmode = false            -- No mostrar -- INSERT -- (airline lo hace)
+-- =========================
+-- CLIPBOARD
+-- =========================
+vim.opt.clipboard = "unnamedplus"
 
--- ============ MOUSE ============
-vim.opt.mouse = 'a'                 -- Soporte de mouse en todos modos
+-- =========================
+-- SEARCH
+-- =========================
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
 
--- ============ CLIPBOARD ============
-vim.opt.clipboard = 'unnamedplus'   -- Usar portapapeles del sistema
+-- =========================
+-- INDENTACION DEFAULT
+-- =========================
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
--- ============ BÚSQUEDA ============
-vim.opt.ignorecase = true           -- Ignorar mayúsculas en búsqueda
-vim.opt.smartcase = true            -- ...pero respetarlas si se usan
-vim.opt.hlsearch = true             -- Resaltar búsquedas
-vim.opt.incsearch = true            -- Búsqueda incremental
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
--- ============ INDENTACIÓN POR DEFECTO ============
-vim.opt.autoindent = true           -- Indentar automáticamente
-vim.opt.smartindent = true          -- Indentar inteligentemente
-vim.opt.expandtab = true            -- Usar espacios en lugar de tabs
-vim.opt.tabstop = 4                 -- Tab = 4 espacios
-vim.opt.softtabstop = 4             -- Cuando editas, tab = 4 espacios
-vim.opt.shiftwidth = 4              -- Sangría de comandos = 4 espacios
+-- =========================
+-- BUFFERS
+-- =========================
+vim.opt.hidden = true
 
--- ============ BUFFERS ============
-vim.opt.hidden = true               -- Permitir cambiar de buffer sin guardar
+-- =========================
+-- UI MODERNA
+-- =========================
+vim.opt.termguicolors = true
 
--- ============ COLOR Y SINTAXIS ============
-vim.opt.termguicolors = true        -- Soporte de 24-bit colors
-vim.opt.syntax = 'on'               -- Resaltado de sintaxis
-vim.cmd('set t_Co=256')             -- 256 colores
-
--- ============ LISTA DE CARACTERES ============
-vim.opt.list = true                 -- Mostrar tabs y fin de línea
+-- =========================
+-- LIST CHARS
+-- =========================
+vim.opt.list = true
 vim.opt.listchars = {
-  tab = '▸ ',
-  trail = '·',
-  extends = '→',
-  precedes = '←',
-  nbsp = '␣'
+	tab = "▸ ",
+	trail = "·",
+	extends = "→",
+	precedes = "←",
+	nbsp = "␣",
 }
-
--- ============ PASTE ============
-vim.opt.paste = false               -- No usar modo paste

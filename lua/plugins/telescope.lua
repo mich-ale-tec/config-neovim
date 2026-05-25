@@ -1,21 +1,41 @@
-local telescope = require('telescope')
-local builtin = require('telescope.builtin')
+local telescope = require("telescope")
+local actions = require("telescope.actions")
 
 telescope.setup({
-  defaults = {
-    layout_strategy = 'vertical',
-    layout_config = {
-      vertical = {
-        width = 0.9,
-        height = 0.95,
-        preview_height = 0.5,
-      },
-    },
-  },
+	defaults = {
+		prompt_prefix = "   ",
+		selection_caret = "➜ ",
+		path_display = { "truncate" },
+
+		layout_strategy = "flex",
+
+		layout_config = {
+			horizontal = {
+				preview_width = 0.55,
+			},
+			vertical = {
+				preview_height = 0.5,
+			},
+		},
+
+		sorting_strategy = "ascending",
+
+		file_ignore_patterns = {
+			"node_modules",
+			".git",
+			"dist",
+			"build",
+		},
+
+		mappings = {
+			i = {
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+				["<Esc>"] = actions.close,
+			},
+		},
+	},
 })
 
--- Keymaps
-local map = vim.keymap.set
-map('n', '<C-p>', builtin.find_files, { noremap = true, silent = true })
-map('n', '<C-b>', builtin.buffers, { noremap = true, silent = true })
-map('n', '<C-f>', builtin.live_grep, { noremap = true, silent = true })
+pcall(telescope.load_extension, "fzf")

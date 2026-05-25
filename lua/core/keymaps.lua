@@ -3,63 +3,78 @@ local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 
--- ============ BÁSICO ============
-map('n', '<Leader>w', ':w<CR>', opts)
-map('n', '<Leader>q', ':q<CR>', opts)
+-- =========================
+-- BASICO
+-- =========================
+map("n", "<Leader>w", ":w<CR>", opts)
+map("n", "<Leader>q", ":q<CR>", opts)
 
--- ============ BUFFERS ============
-map('n', '<C-h>', ':bprev<CR>', opts)
-map('n', '<C-l>', ':bnext<CR>', opts)
-map('n', '<Leader>d', ':bd<CR>', opts)
+-- =========================
+-- BUFFERS
+-- =========================
+map("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
+map("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
+map("n", "<leader>d", ":bdelete<CR>", opts)
 
--- ============ INSERT ESC ============
-map('i', 'jk', '<ESC>', opts)
+-- =========================
+-- INSERT ESC
+-- =========================
+map("i", "jk", "<ESC>", opts)
 
--- ============ VENTANAS ============
-map('n', '<M-j>', ':resize -2<CR>', opts)
-map('n', '<M-k>', ':resize +2<CR>', opts)
-map('n', '<M-h>', ':vertical resize -2<CR>', opts)
-map('n', '<M-l>', ':vertical resize +2<CR>', opts)
+-- =========================
+-- VENTANAS
+-- =========================
+map("n", "<M-j>", ":resize -2<CR>", opts)
+map("n", "<M-k>", ":resize +2<CR>", opts)
+map("n", "<M-h>", ":vertical resize -2<CR>", opts)
+map("n", "<M-l>", ":vertical resize +2<CR>", opts)
 
--- ============ EASY MOTION ============
-map('n', '<Leader>s', '<Plug>(easymotion-s2)', {})
+-- =========================
+-- TREE
+-- =========================
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", {
+	silent = true,
+	desc = "Explorer",
+})
 
--- ============ TREE ============
-map('n', 'sf', ':NvimTreeFindFile<CR>', opts)
-map('n', '<C-n>', ':NvimTreeToggle<CR>', opts)
+map("n", "<leader>fe", "<cmd>NvimTreeFindFile<CR>", {
+	silent = true,
+	desc = "Find current file",
+})
+-- =========================
+-- LSP
+-- =========================
+map("n", "gd", vim.lsp.buf.definition, opts)
+map("n", "gy", vim.lsp.buf.type_definition, opts)
+map("n", "gi", vim.lsp.buf.implementation, opts)
+map("n", "gr", vim.lsp.buf.references, opts)
 
--- ============ NVIM SPECTRE (buscar y reemplazar) ============
-map('n', '<Leader>S', '<cmd>lua require("spectre").open()<CR>', opts)
+map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
+map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, opts)
 
--- ============ TELESCOPE (Búsqueda) ============
--- Se carga en plugins/telescope.lua
+-- =========================
+-- DIAGNOSTICS
+-- =========================
+map("n", "[d", vim.diagnostic.goto_prev, opts)
+map("n", "]d", vim.diagnostic.goto_next, opts)
 
--- ============ LSP ============
-map('n', 'gd', vim.lsp.buf.definition, opts)
-map('n', 'gy', vim.lsp.buf.type_definition, opts)
-map('n', 'gi', vim.lsp.buf.implementation, opts)
-map('n', 'gr', vim.lsp.buf.references, opts)
-map('n', 'K', vim.lsp.buf.hover, opts)
-map('n', '<Leader>ren', vim.lsp.buf.rename, opts)
-map('n', '<Leader>a', vim.lsp.buf.code_action, opts)
+-- FIX: evitar conflicto con resize
+map("n", "<Leader>e", vim.diagnostic.open_float, opts)
 
--- ============ DIAGNOSTICS ============
-map('n', '[g', vim.diagnostic.goto_prev, opts)
-map('n', ']g', vim.diagnostic.goto_next, opts)
+-- =========================
+-- GIT
+-- =========================
+map("n", "<Leader>gn", "<Plug>(GitGutterNextHunk)", {})
+map("n", "<Leader>gp", "<Plug>(GitGutterPrevHunk)", {})
+map("n", "<Leader>gs", ":Git<CR>", opts)
 
--- ============ CODE ACTIONS ============
-map('n', '<Leader>a', vim.lsp.buf.code_action, opts)
-map('x', '<Leader>a', vim.lsp.buf.code_action, opts)
+-- =========================
+-- FLASH
+-- =========================
+map({ "n", "x", "o" }, "s", function()
+	require("flash").jump()
+end, { desc = "Flash jump" })
 
--- ============ HOVER DOCUMENTATION ============
-map('n', 'K', vim.lsp.buf.hover, opts)
- 
--- ============ GIT GUTTER ============
-map('n', '<Leader>gn', '<Plug>(GitGutterNextHunk)', {})
-map('n', '<Leader>gp', '<Plug>(GitGutterPrevHunk)', {})
-
--- ============ VIM MAGIT (git status) ============
-map('n', '<Leader>gs', ':Magit<CR>', opts)
-
--- ============ MOSTRAR DIAGNOSTICS EN LÍNEA ============
-map('n', '<C-l>', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+map({ "n", "x", "o" }, "S", function()
+	require("flash").treesitter()
+end, { desc = "Flash Treesitter" })
