@@ -32,10 +32,10 @@ map("n", "<M-l>", ":vertical resize +2<CR>", opts)
 -- =========================
 -- TREE
 -- =========================
-map("n", "<S-e>", "<cmd>Neotree toggle<cr>", { desc = "Explorer" })
-map("n", "<leader>fe", "<cmd>Neotree reveal<cr>", {
-	desc = "Reveal file in explorer",
-})
+map("n", "<C-n>", ":Neotree filesystem toggle left<cr>")
+map("n", "<C-e>", ":Neotree filesystem focus left<cr>")
+map("n", "<C-o>", ":Neotree buffers toggle left<cr>")
+map("n", "<C-i>", ":Neotree git_status toggle left<cr>")
 -- =========================
 -- LSP
 -- =========================
@@ -43,7 +43,6 @@ map("n", "gd", vim.lsp.buf.definition, opts)
 map("n", "gy", vim.lsp.buf.type_definition, opts)
 map("n", "gi", vim.lsp.buf.implementation, opts)
 map("n", "gr", vim.lsp.buf.references, opts)
-
 map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
 map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, opts)
 
@@ -52,9 +51,7 @@ map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, opts)
 -- =========================
 map("n", "[d", vim.diagnostic.goto_prev, opts)
 map("n", "]d", vim.diagnostic.goto_next, opts)
-
--- FIX: evitar conflicto con resize
-map("n", "<Leader>e", vim.diagnostic.open_float, opts)
+map("n", "[e", vim.diagnostic.open_float, opts)
 
 -- =========================
 -- GIT

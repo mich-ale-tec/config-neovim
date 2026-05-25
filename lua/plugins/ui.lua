@@ -85,19 +85,36 @@ require("neo-tree").setup({
 		mappings = {
 			-- ===== NAVEGACIÓN =====
 			["<space>"] = "none", -- Desactiva espacios por defecto
-			["<cr>"] = {
-				"open",
-				nowait = true,
-				config = {
-					open_strategy = "false",
-				},
-			},
-			["o"] = {
-				"open",
-				config = {
-					open_strategy = "true",
-				},
-			},
+			["<cr>"] = function(state)
+				local node = state.tree:get_node()
+				-- si es directorio, NO cerrar
+				if node.type == "directory" then
+					require("neo-tree.sources.filesystem.commands").toggle_node(state)
+					return
+				end
+
+				-- si es archivo, abrir y cerrar tree
+				require("neo-tree.sources.filesystem.commands").open(state)
+
+				vim.schedule(function()
+					require("neo-tree.command").execute({ action = "close" })
+				end)
+			end,
+
+			["o"] = function(state)
+				local node = state.tree:get_node()
+
+				if node.type == "directory" then
+					require("neo-tree.sources.filesystem.commands").toggle_node(state)
+					return
+				end
+
+				require("neo-tree.sources.filesystem.commands").open(state)
+
+				vim.schedule(function()
+					require("neo-tree.command").execute({ action = "close" })
+				end)
+			end,
 			["O"] = "open_fold", -- 'O' expande carpeta
 			[">"] = "expand_all_subnodes", -- '>' expande todo
 			["<"] = "collapse_all", -- '<' contrae todo
@@ -172,24 +189,6 @@ require("neo-tree").setup({
 		"filesystem",
 		"buffers",
 		"git_status",
-	},
-
-	-- ======= EVENTOS =======
-	event_handlers = {
-		-- Cambia cwd cuando navegas
-		{
-			event = "file_opened",
-			handler = function(file_path)
-				vim.cmd.wincmd("p")
-			end,
-		},
-		-- Expande carpeta padre cuando se sigue archivo
-		{
-			event = "neo_tree_buffer_enter",
-			handler = function()
-				vim.cmd("setlocal cursorline")
-			end,
-		},
 	},
 
 	-- ======= ESTILOS =======
