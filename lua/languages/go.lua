@@ -9,7 +9,6 @@ autocmd("FileType", {
 	pattern = "go",
 	callback = function()
 		local opts = { noremap = true, silent = true, buffer = true }
-
 		-- =========================
 		-- INDENTACIÓN GO (estándar)
 		-- =========================
@@ -21,7 +20,6 @@ autocmd("FileType", {
 		-- =========================
 		-- KEYMAPS LSP (MODERNO)
 		-- =========================
-
 		map("n", "gd", vim.lsp.buf.definition, opts)
 		map("n", "gr", vim.lsp.buf.references, opts)
 		map("n", "K", vim.lsp.buf.hover, opts)
@@ -39,6 +37,10 @@ autocmd("FileType", {
 		map("n", "<leader>gr", function()
 			vim.cmd("w")
 			vim.cmd("!go run .")
+		end, opts)
+		map("n", "<leader>gb", function()
+			vim.cmd("w")
+			vim.cmd("!go run %")
 		end, opts)
 	end,
 })

@@ -10,6 +10,7 @@ vim.lsp.config("ts_ls", {
 	},
 	capabilities = capabilities,
 })
+vim.lsp.enable("ts_ls")
 
 vim.lsp.config("gopls", {
 	cmd = { "gopls" },
@@ -19,8 +20,6 @@ vim.lsp.config("gopls", {
 	},
 	capabilities = capabilities,
 })
-
-vim.lsp.enable("ts_ls")
 vim.lsp.enable("gopls")
 
 vim.diagnostic.config({

@@ -6,8 +6,7 @@ vim.opt.relativenumber = true
 vim.opt.numberwidth = 2
 vim.opt.cursorline = true
 vim.opt.ruler = true
-vim.opt.laststatus = 3 -- mejor que 2 (global statusline)
-
+vim.opt.laststatus = 3
 -- =========================
 -- MOUSE
 -- =========================

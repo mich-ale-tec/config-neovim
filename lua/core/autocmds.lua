@@ -42,7 +42,7 @@ autocmd("FileType", {
 	group = filetype_group,
 	pattern = "go",
 	callback = function()
-		set_indent({ tabstop = 8, expandtab = false })
+		set_indent({ tabstop = 2, expandtab = false })
 	end,
 })
 
