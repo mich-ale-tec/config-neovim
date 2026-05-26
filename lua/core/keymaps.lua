@@ -8,6 +8,9 @@ vim.g.mapleader = " "
 -- =========================
 map("n", "<Leader>w", ":w<CR>", opts)
 map("n", "<Leader>q", ":q<CR>", opts)
+map("n", "<leader>-", function()
+	vim.cmd("nohlsearch")
+end, opts)
 
 -- =========================
 -- BUFFERS

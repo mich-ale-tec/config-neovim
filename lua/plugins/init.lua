@@ -17,9 +17,16 @@ require("lazy").setup({
 	-- ============ LSP ============
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+		},
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
 		},
 	},
 	-- ============ COMPLETION ============
@@ -84,6 +91,18 @@ require("lazy").setup({
 		},
 		build = "make",
 	},
+	-- ============ NOICE ============
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
 	-- ============ TELESCOP - FZF ============
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
@@ -99,27 +118,8 @@ require("lazy").setup({
 	-- ============ Tressitter ============
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
 		build = ":TSUpdate",
-		event = { "BufNewFile" },
-		opts = {
-			ensure_installed = {
-				"lua",
-				"vim",
-				"vimdoc",
-				"go",
-				"bash",
-				"json",
-				"yaml",
-				"markdown",
-				"markdown_inline",
-			},
-			highlight = { enable = true },
-			indent = { enable = true },
-		},
-
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
 	},
 	-- ============ MARKDOWN ============
 	{
@@ -239,3 +239,4 @@ require("plugins.emmet")
 require("plugins.options")
 require("plugins.navigation")
 require("plugins.telescope")
+require("plugins.treesitter")

@@ -228,12 +228,6 @@ require("ibl").setup({
 })
 
 -- =========================
--- BUFFER LINE
--- =========================
-vim.opt.termguicolors = true
-vim.opt.showtabline = 2
-
--- =========================
 -- WHICH KEY
 -- =========================
 require("which-key").setup({
