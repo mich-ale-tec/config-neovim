@@ -115,14 +115,9 @@ require("neo-tree").setup({
 					require("neo-tree.command").execute({ action = "close" })
 				end)
 			end,
-			["O"] = "open_fold", -- 'O' expande carpeta
-			[">"] = "expand_all_subnodes", -- '>' expande todo
-			["<"] = "collapse_all", -- '<' contrae todo
-
 			-- ===== SPLITS =====
 			["s"] = "open_split", -- 's' split horizontal
 			["v"] = "open_vsplit", -- 'v' split vertical
-			["t"] = "open_tabnew", -- 't' nueva pestaña
 
 			-- ===== ARCHIVO/CARPETA =====
 			["a"] = "add", -- 'a' crear archivo
@@ -131,7 +126,6 @@ require("neo-tree").setup({
 			["r"] = "rename", -- 'r' renombrar
 			["R"] = "refresh", -- 'R' recargar
 			["c"] = "copy_to_clipboard", -- 'c' copiar
-			["m"] = "move_to_clipboard", -- 'm' cortar
 			["p"] = "paste_from_clipboard", -- 'p' pegar
 
 			-- ===== BÚSQUEDA =====
@@ -144,8 +138,6 @@ require("neo-tree").setup({
 			["."] = "toggle_hidden", -- '.' mostrar/ocultar dotfiles
 			["<c-k>"] = "toggle_preview", -- '<C-k>' preview
 			["C"] = "set_root", -- 'C' cambiar raíz
-			["-"] = "navigate_up", -- '-' ir a padre
-			["_"] = "navigate_down", -- '_' bajar a carpeta
 
 			-- ===== EXPANSIÓN =====
 			["<tab>"] = "toggle_node", -- Tab expande/contrae
