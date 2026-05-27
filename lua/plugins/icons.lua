@@ -5,6 +5,7 @@ local folder_icons = {
 	state = "󰆧", -- state management
 	context = "󰆍", -- react context
 	auth = "󰌾", -- authentication
+	core = "󰒓", -- nucleo
 
 	-- Organización & Estructura
 	shared = "󰔗", -- recursos compartidos (link)
