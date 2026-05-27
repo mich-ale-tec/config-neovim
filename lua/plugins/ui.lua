@@ -111,36 +111,9 @@ require("neo-tree").setup({
 		mappings = {
 			-- ===== NAVEGACIÓN =====
 			["<space>"] = "none", -- Desactiva espacios por defecto
-			["<cr>"] = function(state)
-				local node = state.tree:get_node()
-				-- si es directorio, NO cerrar
-				if node.type == "directory" then
-					require("neo-tree.sources.filesystem.commands").toggle_node(state)
-					return
-				end
+			["<cr>"] = "open",
 
-				-- si es archivo, abrir y cerrar tree
-				require("neo-tree.sources.filesystem.commands").open(state)
-
-				vim.schedule(function()
-					require("neo-tree.command").execute({ action = "close" })
-				end)
-			end,
-
-			["o"] = function(state)
-				local node = state.tree:get_node()
-
-				if node.type == "directory" then
-					require("neo-tree.sources.filesystem.commands").toggle_node(state)
-					return
-				end
-
-				require("neo-tree.sources.filesystem.commands").open(state)
-
-				vim.schedule(function()
-					require("neo-tree.command").execute({ action = "close" })
-				end)
-			end,
+			["o"] = "open",
 			-- ===== SPLITS =====
 			["s"] = "open_split", -- 's' split horizontal
 			["v"] = "open_vsplit", -- 'v' split vertical
