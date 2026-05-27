@@ -3,7 +3,7 @@
 -- =========================
 require("lualine").setup({
 	options = {
-		theme = "everforest",
+		theme = "auto",
 		globalstatus = true,
 		icons_enabled = true,
 	},
@@ -12,6 +12,7 @@ require("lualine").setup({
 -- =========================
 -- TREE
 -- =========================
+require("plugins.icons")
 require("neo-tree").setup({
 	-- ======= GENERAL =======
 	close_if_last_window = true,
@@ -19,6 +20,31 @@ require("neo-tree").setup({
 	enable_diagnostics = true,
 	sort_case_insensitive = true,
 
+	default_component_configs = {
+		icon = {
+			folder_closed = "",
+			folder_open = "",
+			default = "*",
+		},
+	},
+	renderers = {
+		directory = {
+			{
+				"icon",
+				provider = function(icon, node)
+					icon.text = _G.GetIconFolder(node.name)
+					return icon
+				end,
+			},
+			{ "current_filter" },
+			{ "name" },
+		},
+
+		file = {
+			{ "icon" },
+			{ "name" },
+		},
+	},
 	-- ======= FILESYSTEM =======
 	filesystem = {
 		-- Filtros inteligentes

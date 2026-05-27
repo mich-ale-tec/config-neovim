@@ -43,7 +43,7 @@ require("lazy").setup({
 	},
 	-- ============ THEME ============
 	{
-		"sainnhe/everforest",
+		"loctvl842/monokai-pro.nvim",
 		lazy = false,
 		priority = 1000,
 	},
@@ -217,10 +217,10 @@ require("lazy").setup({
 		},
 	},
 }, {
-	install = { colorscheme = { "everforest" } },
 	checker = { enabled = false },
 })
 
+_G.vim.notify("Cargando plugins")
 require("plugins.themes")
 require("plugins.ui")
 require("plugins.lsp")
