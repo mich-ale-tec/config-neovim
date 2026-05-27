@@ -23,8 +23,5 @@ autocmd("FileType", {
 
 		-- ejecutar script Perl
 		map("n", "<F5>", ":!perl %<CR>", opts)
-
-		-- mostrar diagnósticos LSP (si existe)
-		map("n", "<leader>e", vim.diagnostic.open_float, opts)
 	end,
 })

@@ -23,8 +23,5 @@ autocmd("FileType", {
 
 		-- ejecutar archivo ruby
 		map("n", "<F5>", ":!ruby %<CR>", opts)
-
-		-- mostrar diagnósticos LSP
-		map("n", "<leader>e", vim.diagnostic.open_float, opts)
 	end,
 })

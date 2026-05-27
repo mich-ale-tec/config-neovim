@@ -1,3 +1,4 @@
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local map = vim.keymap.set
@@ -32,3 +33,15 @@ autocmd("FileType", {
 		map("n", "<F5>", ":!node %<CR>", opts)
 	end,
 })
+
+vim.lsp.config("ts_ls", {
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = {
+		"typescript",
+		"typescriptreact",
+		"javascript",
+		"javascriptreact",
+	},
+	capabilities = capabilities,
+})
+vim.lsp.enable("ts_ls")

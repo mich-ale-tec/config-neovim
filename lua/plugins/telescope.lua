@@ -25,6 +25,7 @@ telescope.setup({
 			".git",
 			"dist",
 			"build",
+			".idea",
 		},
 
 		mappings = {

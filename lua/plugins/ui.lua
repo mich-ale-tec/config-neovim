@@ -125,19 +125,12 @@ require("neo-tree").setup({
 			["d"] = "delete", -- 'd' eliminar
 			["r"] = "rename", -- 'r' renombrar
 			["R"] = "refresh", -- 'R' recargar
-			["c"] = "copy_to_clipboard", -- 'c' copiar
 			["p"] = "paste_from_clipboard", -- 'p' pegar
-
-			-- ===== BÚSQUEDA =====
-			["f"] = "filter_on_submit", -- 'f' filtrar archivos
-			["<c-x>"] = "clear_filter", -- '<C-x>' limpiar filtro
 
 			-- ===== UTILIDADES =====
 			["q"] = "close_window", -- 'q' cerrar
 			["?"] = "show_help", -- '?' mostrar ayuda
-			["."] = "toggle_hidden", -- '.' mostrar/ocultar dotfiles
 			["<c-k>"] = "toggle_preview", -- '<C-k>' preview
-			["C"] = "set_root", -- 'C' cambiar raíz
 
 			-- ===== EXPANSIÓN =====
 			["<tab>"] = "toggle_node", -- Tab expande/contrae
@@ -180,7 +173,6 @@ require("neo-tree").setup({
 	sources = {
 		"filesystem",
 		"buffers",
-		"git_status",
 	},
 
 	-- ======= ESTILOS =======

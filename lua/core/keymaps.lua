@@ -1,23 +1,41 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-vim.g.mapleader = " "
+_G.wraperDescription = function(opts, desc)
+	return vim.tbl_extend("force", opts, {
+		desc = desc,
+	})
+end
 
+vim.g.mapleader = " "
+-- =========================
+-- FUNCTIONS
+-- =========================
+local function clearSearchHighlight()
+	vim.cmd("nohlsearch")
+end
+local function closeOthersBuffers()
+	local current = vim.api.nvim_get_current_buf()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
+			vim.api.nvim_buf_delete(buf, { force = true })
+		end
+	end
+end
 -- =========================
 -- BASICO
 -- =========================
-map("n", "<Leader>w", ":w<CR>", opts)
-map("n", "<Leader>q", ":q<CR>", opts)
-map("n", "<leader>-", function()
-	vim.cmd("nohlsearch")
-end, opts)
-
+map("n", "<Leader>w", ":w<CR>", wraperDescription(opts, "Save"))
+map("n", "<Leader>q", ":q<CR>", wraperDescription(opts, "Close"))
+map("n", "<leader>-", clearSearchHighlight, wraperDescription(opts, "Clear Search Highlight"))
+map("n", "<C-->", "<C-o>", wraperDescription({ silent = true }, "Back Jump"))
+map("n", "<leader>bw", closeOthersBuffers, wraperDescription(opts, "Close Other Buffers"))
 -- =========================
 -- BUFFERS
 -- =========================
-map("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
-map("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
-map("n", "<leader>d", ":bdelete<CR>", opts)
+map("n", "<S-l>", ":BufferLineCycleNext<CR>", wraperDescription(opts, "Next Buffer"))
+map("n", "<S-h>", ":BufferLineCyclePrev<CR>", wraperDescription(opts, "Back Buffer"))
+map("n", "<leader>d", ":bdelete<CR>", wraperDescription(opts, "Close Current Buffer"))
 
 -- =========================
 -- INSERT ESC
@@ -35,41 +53,21 @@ map("n", "<M-l>", ":vertical resize +2<CR>", opts)
 -- =========================
 -- TREE
 -- =========================
-map("n", "<C-n>", ":Neotree filesystem toggle left<cr>")
-map("n", "<C-e>", ":Neotree filesystem focus left<cr>")
-map("n", "<C-o>", ":Neotree buffers toggle left<cr>")
-map("n", "<C-i>", ":Neotree git_status toggle left<cr>")
--- =========================
--- LSP
--- =========================
-map("n", "gd", vim.lsp.buf.definition, opts)
-map("n", "gy", vim.lsp.buf.type_definition, opts)
-map("n", "gi", vim.lsp.buf.implementation, opts)
-map("n", "gr", vim.lsp.buf.references, opts)
-map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
-map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, opts)
+map("n", "<C-e>", ":Neotree filesystem toggle left<cr>", opts)
+map("n", "<C-o>", ":Neotree buffers toggle left<cr>", opts)
 
 -- =========================
--- DIAGNOSTICS
+-- SPECTRE
 -- =========================
-map("n", "[d", vim.diagnostic.goto_prev, opts)
-map("n", "]d", vim.diagnostic.goto_next, opts)
-map("n", "[e", vim.diagnostic.open_float, opts)
-
--- =========================
--- GIT
--- =========================
-map("n", "<Leader>gn", "<Plug>(GitGutterNextHunk)", {})
-map("n", "<Leader>gp", "<Plug>(GitGutterPrevHunk)", {})
-map("n", "<Leader>gs", ":Git<CR>", opts)
-
--- =========================
--- FLASH
--- =========================
-map({ "n", "x", "o" }, "s", function()
-	require("flash").jump()
-end, { desc = "Flash jump" })
-
-map({ "n", "x", "o" }, "S", function()
-	require("flash").treesitter()
-end, { desc = "Flash Treesitter" })
+map("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
+	desc = "Toggle Spectre",
+})
+map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+	desc = "Search current word",
+})
+map("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+	desc = "Search current word",
+})
+map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+	desc = "Search on current file",
+})

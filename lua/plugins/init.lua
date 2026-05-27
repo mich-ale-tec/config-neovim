@@ -67,6 +67,10 @@ require("lazy").setup({
 		"folke/flash.nvim",
 		event = "VeryLazy",
 	},
+	-- ============ SPECTRE ============
+	{
+		"nvim-pack/nvim-spectre",
+	},
 	-- ============ TREE ============
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -125,18 +129,6 @@ require("lazy").setup({
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("bufferline").setup({
-				options = {
-					mode = "buffers",
-					separator_style = "slant",
-					diagnostics = "nvim_lsp",
-					show_buffer_close_icons = true,
-					show_close_icon = false,
-					always_show_bufferline = false,
-				},
-			})
-		end,
 	},
 	-- ============ MARKDOWN ============
 	{
@@ -235,8 +227,8 @@ require("plugins.lsp")
 require("plugins.completion")
 require("plugins.git")
 require("plugins.formatting")
-require("plugins.emmet")
 require("plugins.options")
 require("plugins.navigation")
 require("plugins.telescope")
 require("plugins.treesitter")
+require("plugins.markdown")

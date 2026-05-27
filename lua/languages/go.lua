@@ -1,3 +1,4 @@
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local map = vim.keymap.set
@@ -18,29 +19,30 @@ autocmd("FileType", {
 		vim.opt_local.softtabstop = 2
 
 		-- =========================
-		-- KEYMAPS LSP (MODERNO)
-		-- =========================
-		map("n", "gd", vim.lsp.buf.definition, opts)
-		map("n", "gr", vim.lsp.buf.references, opts)
-		map("n", "K", vim.lsp.buf.hover, opts)
-		map("n", "<leader>rn", vim.lsp.buf.rename, opts)
-		map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-		-- =========================
-		-- TESTS (MODERNO con terminal)
+		-- TESTS
 		-- =========================
 		map("n", "<leader>gt", function()
 			vim.cmd("w")
 			vim.cmd("!go test ./...")
-		end, opts)
+		end, _G.wraperDescription(opts, "Go Test"))
 
 		map("n", "<leader>gr", function()
 			vim.cmd("w")
 			vim.cmd("!go run .")
-		end, opts)
+		end, _G.wraperDescription(opts, "Go Run Project"))
 		map("n", "<leader>gb", function()
 			vim.cmd("w")
 			vim.cmd("!go run %")
-		end, opts)
+		end, _G.wraperDescription(opts, "Go Run Buffer"))
 	end,
 })
+
+vim.lsp.config("gopls", {
+	cmd = { "gopls" },
+	filetypes = {
+		"go",
+		"gomod",
+	},
+	capabilities = capabilities,
+})
+vim.lsp.enable("gopls")
