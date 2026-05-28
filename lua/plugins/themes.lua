@@ -1,4 +1,4 @@
-require("monokai-pro").setup({
+--[[ require("monokai-pro").setup({
 	transparent_background = false,
 	terminal_colors = true,
 	devicons = true,
@@ -46,6 +46,31 @@ require("monokai-pro").setup({
 	override_scheme = function(scheme, palette, colors)
 		return {}
 	end,
+}) ]]
+
+require("gruvbox").setup({
+	terminal_colors = true, -- add neovim terminal colors
+	undercurl = true,
+	underline = true,
+	bold = true,
+	italic = {
+		strings = true,
+		emphasis = true,
+		comments = true,
+		operators = false,
+		folds = true,
+	},
+	strikethrough = true,
+	invert_selection = false,
+	invert_signs = false,
+	invert_tabline = false,
+	inverse = true, -- invert background for search, diffs, statuslines and errors
+	contrast = "hard", -- can be "hard", "soft" or empty string
+	palette_overrides = {},
+	overrides = {},
+	dim_inactive = false,
+	transparent_mode = false,
 })
 
-vim.cmd.colorscheme("monokai-pro-octagon")
+vim.cmd("colorscheme gruvbox")
+--vim.cmd.colorscheme("monokai-pro-octagon")

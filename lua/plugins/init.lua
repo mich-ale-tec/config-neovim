@@ -47,6 +47,7 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 	},
+	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
 	-- ============ LUA LINE ============
 	{
 		"nvim-lualine/lualine.nvim",
@@ -220,7 +221,6 @@ require("lazy").setup({
 	checker = { enabled = false },
 })
 
-_G.vim.notify("Cargando plugins")
 require("plugins.themes")
 require("plugins.ui")
 require("plugins.lsp")
@@ -230,5 +230,4 @@ require("plugins.formatting")
 require("plugins.options")
 require("plugins.navigation")
 require("plugins.telescope")
-require("plugins.treesitter")
 require("plugins.markdown")

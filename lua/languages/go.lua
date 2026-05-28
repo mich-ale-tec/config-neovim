@@ -9,6 +9,7 @@ autocmd("FileType", {
 	group = go_group,
 	pattern = "go",
 	callback = function()
+		vim.treesitter.start(0)
 		local opts = { noremap = true, silent = true, buffer = true }
 		-- =========================
 		-- INDENTACIÓN GO (estándar)

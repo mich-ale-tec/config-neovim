@@ -16,6 +16,7 @@ autocmd("FileType", {
 		"tsx",
 	},
 	callback = function()
+		vim.treesitter.start(0)
 		-- =========================
 		-- INDENTACIÓN (standard web)
 		-- =========================

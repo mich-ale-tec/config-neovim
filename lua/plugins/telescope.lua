@@ -26,6 +26,7 @@ telescope.setup({
 			"dist",
 			"build",
 			".idea",
+			"log*",
 		},
 
 		mappings = {
