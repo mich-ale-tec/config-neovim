@@ -3,9 +3,8 @@
 -- =========================
 require("lualine").setup({
 	options = {
-		theme = "auto",
+		theme = "gruvbox",
 		globalstatus = true,
-		icons_enabled = true,
 	},
 })
 
