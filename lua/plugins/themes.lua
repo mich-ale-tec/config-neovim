@@ -18,7 +18,7 @@
 		day_filter = "pro",
 		night_filter = "spectrum",
 	},
-	inc_search = "background", -- underline | background
+	inc_search = "underline", -- underline | background
 	background_clear = {
 		"toggleterm",
 		"telescope",

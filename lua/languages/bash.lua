@@ -1,3 +1,4 @@
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local map = vim.keymap.set
@@ -14,8 +15,6 @@ autocmd("FileType", {
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.expandtab = true
 
-		vim.treesitter.start()
-
 		-- Keymaps específicos
 		local opts = { noremap = true, silent = true, buffer = true }
 
@@ -23,3 +22,14 @@ autocmd("FileType", {
 		map("n", "<F5>", ":!bash %<CR>", opts)
 	end,
 })
+
+vim.lsp.config("bash_lsp", {
+	cmd = { "bash-language-server" },
+	filetypes = {
+		"bash",
+		"sh",
+		"zsh",
+	},
+	capabilities = capabilities,
+})
+vim.lsp.enable("bash_lsp")
