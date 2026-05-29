@@ -10,6 +10,7 @@ autocmd("FileType", {
 	group = bash_group,
 	pattern = { "bash", "sh", "zsh" },
 	callback = function()
+		vim.treesitter.start(0)
 		vim.opt_local.tabstop = 2
 		vim.opt_local.softtabstop = 2
 		vim.opt_local.shiftwidth = 2

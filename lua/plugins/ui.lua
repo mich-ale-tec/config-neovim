@@ -102,7 +102,6 @@ require("neo-tree").setup({
 	-- ======= VENTANA PRINCIPAL =======
 	window = {
 		position = "left",
-		width = 35,
 		mapping_options = {
 			noremap = true,
 			nowait = true,
