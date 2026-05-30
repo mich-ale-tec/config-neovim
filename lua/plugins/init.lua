@@ -126,6 +126,13 @@ require("lazy").setup({
 		lazy = false,
 		build = ":TSUpdate",
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		init = function()
+			vim.g.no_plugin_maps = true
+		end,
+	},
 	-- ============ MARKDOWN ============
 	{
 		"akinsho/bufferline.nvim",
@@ -231,3 +238,4 @@ require("plugins.options")
 require("plugins.navigation")
 require("plugins.telescope")
 require("plugins.markdown")
+require("plugins.treesitter")
