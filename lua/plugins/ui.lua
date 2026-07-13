@@ -123,6 +123,7 @@ require("neo-tree").setup({
 			["r"] = "rename", -- 'r' renombrar
 			["R"] = "refresh", -- 'R' recargar
 			["p"] = "paste_from_clipboard", -- 'p' pegar
+			["m"] = "move",
 
 			-- ===== UTILIDADES =====
 			["q"] = "close_window", -- 'q' cerrar

@@ -9,6 +9,3 @@ Se necesita instalar parsers adicionales
 :TSInstall go
 :TSInstall javascript
 :TSInstall lua
-```
-
-Probadno
