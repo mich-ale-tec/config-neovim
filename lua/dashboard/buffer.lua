@@ -27,11 +27,12 @@ end
 
 ---@param lines string[]
 ---@param languages string[]
-local function add_languages(lines, languages)
+---@param selected integer
+local function add_languages(lines, languages, selected)
 	add_line(lines, SECTION_LANGUAGES)
 	newline(lines)
 	for index, language in ipairs(languages) do
-		local prefix = index == 1 and "❯ " or "  "
+		local prefix = index == selected and "❯ " or "  "
 		add_line(lines, prefix .. language)
 	end
 	newline(lines)
@@ -44,12 +45,13 @@ local function add_footer(lines, total)
 end
 
 ---@param languages string[]
+---@param selected integer
 ---@return string[]
-function M.build(languages)
+function M.build(languages, selected)
 	---@type string[]
 	local lines = {}
 	add_title(lines)
-	add_languages(lines, languages)
+	add_languages(lines, languages, selected)
 	add_footer(lines, #languages)
 	return lines
 end
