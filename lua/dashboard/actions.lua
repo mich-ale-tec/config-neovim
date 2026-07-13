@@ -31,4 +31,22 @@ function M.move_up(state)
 	refresh(state)
 end
 
+---@param state DashboardState
+function M.open(state)
+	local language = state.languages[state.selected]
+	local path_nvim = vim.fn.stdpath("config")
+	local path = vim.fs.joinpath(path_nvim, "lua", "languages", language .. ".lua")
+	vim.api.nvim_win_close(state.win, true)
+	vim.cmd.edit(path)
+end
+
+---@param state DashboardState
+function M.close(state)
+	if state.win and vim.api.nvim_win_is_valid(state.win) then
+		vim.api.nvim_win_close(state.win, true)
+	end
+	state.win = nil
+	state.buf = nil
+end
+
 return M
