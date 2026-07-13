@@ -26,7 +26,11 @@ local function create_window(width, height, buf)
 		width = width,
 		height = height,
 		border = "rounded",
+		style = "minimal",
 	})
+	vim.wo[win].number = false
+	vim.wo[win].relativenumber = false
+	vim.wo[win].signcolumn = "no"
 	return win
 end
 

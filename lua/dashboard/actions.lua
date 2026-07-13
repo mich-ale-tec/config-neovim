@@ -2,11 +2,13 @@
 local M = {}
 
 local buffer = require("dashboard.buffer")
+local highlight = require("dashboard.highlight")
 
 ---@param state DashboardState
 local function refresh(state)
 	local lines = buffer.build(state.languages, state.selected)
 	vim.api.nvim_buf_set_lines(state.buf, 0, -1, false, lines)
+	highlight.apply(state.buf, state.selected + 3)
 end
 
 ---@param state DashboardState
@@ -47,6 +49,20 @@ function M.close(state)
 	end
 	state.win = nil
 	state.buf = nil
+	state.opened = false
+	state.selected = 1
+end
+
+---@param state DashboardState
+function M.first(state)
+	state.selected = 1
+	refresh(state)
+end
+
+---@param state DashboardState
+function M.last(state)
+	state.selected = #state.languages
+	refresh(state)
 end
 
 return M

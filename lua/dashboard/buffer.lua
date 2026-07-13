@@ -2,9 +2,10 @@
 local M = {}
 
 local TITLE = {
-	"ArchMich Dashboard",
+	"   ArchMich Dashboard",
 }
 local SECTION_LANGUAGES = "Languages"
+local SEPARATOR = "────────────────────"
 
 ---@param lines string[]
 local function newline(lines)
@@ -30,6 +31,7 @@ end
 ---@param selected integer
 local function add_languages(lines, languages, selected)
 	add_line(lines, SECTION_LANGUAGES)
+	add_line(lines, SEPARATOR)
 	newline(lines)
 	for index, language in ipairs(languages) do
 		local prefix = index == selected and "❯ " or "  "
@@ -41,7 +43,7 @@ end
 ---@param lines string[]
 ---@param total number
 local function add_footer(lines, total)
-	add_line(lines, ("Total: %d"):format(total))
+	add_line(lines, ("Total languages: %d"):format(total))
 end
 
 ---@param languages string[]

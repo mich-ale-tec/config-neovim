@@ -7,6 +7,9 @@ M.selected = 1
 ---@type string[]
 M.languages = {}
 
+---@type boolean
+M.opened = false
+
 ---@type integer?
 M.buf = nil
 
