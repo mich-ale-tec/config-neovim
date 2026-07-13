@@ -17,3 +17,10 @@ autocmd("BufReadPost", {
 		end
 	end,
 })
+-- =========================
+-- PLUGINS
+-- =========================
+local command = vim.api.nvim_create_user_command
+command("Dashboard", function()
+	require("dashboard").open()
+end, { desc = "Open ArchMich Dashboard" })
