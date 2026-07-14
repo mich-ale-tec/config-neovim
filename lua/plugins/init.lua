@@ -228,7 +228,7 @@ require("lazy").setup({
 	checker = { enabled = false },
 })
 
-require("plugins.themes")
+require("plugins.interface")
 require("plugins.ui")
 require("plugins.lsp")
 require("plugins.completion")

@@ -14,7 +14,6 @@ require("lualine").setup({
 require("plugins.icons")
 require("neo-tree").setup({
 	-- ======= GENERAL =======
-	close_if_last_window = true,
 	enable_git_status = true,
 	enable_diagnostics = true,
 	sort_case_insensitive = true,

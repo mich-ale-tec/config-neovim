@@ -14,6 +14,7 @@ autocmd("FileType", {
 		"typescriptreact",
 		"jsx",
 		"tsx",
+		"svelte",
 	},
 	callback = function()
 		vim.treesitter.start(0)
@@ -46,3 +47,15 @@ vim.lsp.config("ts_ls", {
 	capabilities = capabilities,
 })
 vim.lsp.enable("ts_ls")
+
+vim.lsp.config("svelte", {
+	cmd = {
+		"svelteserver",
+		"--stdio",
+	},
+	filetypes = {
+		"svelte",
+	},
+	capabilities = capabilities,
+})
+vim.lsp.enable("svelte")
