@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- ============ PLUGINS ============
-local dua = require("plugins.dua")
 require("lazy").setup({
 	-- ============ LSP ============
 	{
@@ -225,7 +224,6 @@ require("lazy").setup({
 			"typescriptreact",
 		},
 	},
-	dua,
 }, {
 	checker = { enabled = false },
 })
