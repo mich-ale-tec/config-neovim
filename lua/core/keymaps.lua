@@ -27,6 +27,7 @@ end
 -- =========================
 map("n", "<Leader>w", ":w<CR>", wraperDescription(opts, "Save"))
 map("n", "<Leader>q", ":q<CR>", wraperDescription(opts, "Close"))
+map("n", "q", ":q<CR>", wraperDescription(opts, "Close"))
 map("n", "<leader>-", clearSearchHighlight, wraperDescription(opts, "Clear Search Highlight"))
 map("n", "<C-->", "<C-o>", wraperDescription({ silent = true }, "Back Jump"))
 map("n", "<leader>bw", closeOthersBuffers, wraperDescription(opts, "Close Other Buffers"))

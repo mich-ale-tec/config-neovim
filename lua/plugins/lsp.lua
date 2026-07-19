@@ -27,40 +27,63 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
 -- =========================
--- KEYMAPS
+-- FUCNTIONS
 -- =========================
-map("n", "gd", vim.lsp.buf.definition, _G.wraperDescription(opts, "Go Definition"))
-map("n", "gy", vim.lsp.buf.type_definition, _G.wraperDescription(opts, "Go Type Definition"))
-map("n", "gi", vim.lsp.buf.implementation, _G.wraperDescription(opts, "Go Implementation"))
-map("n", "gr", vim.lsp.buf.references, _G.wraperDescription(opts, "Go References"))
-map("n", "<Leader>rn", vim.lsp.buf.rename, _G.wraperDescription(opts, "Variable Rename"))
-map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, _G.wraperDescription(opts, "Code Actions"))
-map("n", "K", function()
+local function showPreviewSign()
 	vim.lsp.buf.hover({
 		border = "rounded",
 		max_width = 80,
 		max_height = 20,
 	})
-end, opts)
-map({ "n", "i" }, "<C-t>", function()
+end
+local function showSign()
 	vim.lsp.buf.signature_help({
 		border = "rounded",
 		max_width = 80,
 		max_height = 20,
 	})
-end, opts)
+end
+local function filter_node_modules(opts)
+	return function(loc)
+		local items = vim.tbl_filter(function(item)
+			return not string.match(item.filename or "", "node_modules")
+		end, loc.items)
 
+		if #items == 0 then
+			vim.notify("Solo se encontró definición en node_modules", vim.log.levels.WARN)
+			return
+		end
+
+		if #items == 1 then
+			-- un solo resultado -> saltar directo
+			vim.fn.setqflist({}, " ", { title = loc.title, items = items })
+			vim.cmd("cfirst")
+		else
+			-- varios resultados -> quickfix normal
+			vim.fn.setqflist({}, " ", { title = loc.title, items = items })
+			vim.cmd("copen")
+		end
+	end
+end
 -- =========================
--- DIAGNOSTIC
+-- KEYMAPS LSP
 -- =========================
-map("n", "[d", vim.diagnostic.goto_prev, _G.wraperDescription(opts, "Diagnostic Prev"))
-map("n", "]d", vim.diagnostic.goto_next, _G.wraperDescription(opts, "Diagnostic Next"))
-vim.keymap.set("n", "<leader>e", function()
+map("n", "<Leader>rn", vim.lsp.buf.rename, _G.wraperDescription(opts, "Variable Rename"))
+map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, _G.wraperDescription(opts, "Code Actions"))
+map("n", "K", showPreviewSign, _G.wraperDescription(opts, "Show Preview Sign"))
+map({ "n", "i" }, "<C-t>", showSign, _G.wraperDescription(opts, "Show Sign"))
+
+local function showDiagnostic()
 	vim.diagnostic.open_float({
 		border = "rounded",
 		focus = false,
 		source = "always",
 	})
-end, _G.wraperDescription(opts, "Diagnostic Open Float"))
+end
+-- =========================
+-- DIAGNOSTIC
+-- =========================
+map("n", "[d", vim.diagnostic.goto_prev, _G.wraperDescription(opts, "Diagnostic Prev"))
+map("n", "]d", vim.diagnostic.goto_next, _G.wraperDescription(opts, "Diagnostic Next"))
+map("n", "<leader>e", showDiagnostic, _G.wraperDescription(opts, "Diagnostic Open Float"))

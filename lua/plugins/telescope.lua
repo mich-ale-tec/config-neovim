@@ -1,5 +1,8 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
+local builtin = require("telescope.builtin")
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 telescope.setup({
 	defaults = {
@@ -39,5 +42,10 @@ telescope.setup({
 		},
 	},
 })
+
+map("n", "gd", builtin.lsp_definitions, _G.wraperDescription(opts, "Go Definition"))
+map("n", "gy", builtin.lsp_type_definitions, _G.wraperDescription(opts, "Go Type Definition"))
+map("n", "gi", builtin.lsp_implementations, _G.wraperDescription(opts, "Go Implementation"))
+map("n", "gr", builtin.lsp_references, _G.wraperDescription(opts, "Go References"))
 
 pcall(telescope.load_extension, "fzf")

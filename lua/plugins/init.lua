@@ -100,9 +100,7 @@ require("lazy").setup({
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
+		opts = {},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
@@ -191,6 +189,13 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- ============ Jump references, types, implements ============
+	{
+		"rmagatti/goto-preview",
+		dependencies = { "rmagatti/logger.nvim" },
+		event = "BufEnter",
+		config = true,
+	},
 	-- ============ Conform ============
 	{
 		"stevearc/conform.nvim",
@@ -239,3 +244,4 @@ require("plugins.navigation")
 require("plugins.telescope")
 require("plugins.markdown")
 require("plugins.treesitter")
+require("plugins.goto")

@@ -2,7 +2,7 @@
 local M = {}
 
 local TITLE = {
-	"   ArchMich Dashboard",
+	"Mich Dashboard",
 }
 local SECTION_LANGUAGES = "Languages"
 local SEPARATOR = "────────────────────"
