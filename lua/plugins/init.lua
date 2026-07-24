@@ -41,6 +41,13 @@ require("lazy").setup({
 			"rafamadriz/friendly-snippets",
 		},
 	},
+	{
+		"benfowler/telescope-luasnip.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"L3MON4D3/LuaSnip",
+		},
+	},
 	-- ============ THEME ============
 	{
 		"loctvl842/monokai-pro.nvim",

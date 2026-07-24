@@ -4,21 +4,13 @@ local map = vim.keymap.set
 -- =========================
 require("flash").setup()
 
-map({ "n", "x", "o" }, "s", function()
+local function jump()
 	require("flash").jump()
-end, { desc = "Flash jump" })
+end
 
-map({ "n", "x", "o" }, "S", function()
+local function jumpTreesitter()
 	require("flash").treesitter()
-end, { desc = "Flash Treesitter" })
+end
 
--- =========================
--- TELESCOPE
--- =========================
-local builtin = require("telescope.builtin")
-
-map("n", "<C-p>", builtin.find_files, { desc = "Find files" })
-map("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
-map("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
-map("n", "<leader>fh", builtin.help_tags, { desc = "Help Telescope" })
-map("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
+map({ "n", "x", "o" }, "s", jump, { desc = "Flash jump" })
+map({ "n", "x", "o" }, "S", jumpTreesitter, { desc = "Flash Treesitter" })
