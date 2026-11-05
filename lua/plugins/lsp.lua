@@ -44,28 +44,6 @@ local function showSign()
 		max_height = 20,
 	})
 end
-local function filter_node_modules(opts)
-	return function(loc)
-		local items = vim.tbl_filter(function(item)
-			return not string.match(item.filename or "", "node_modules")
-		end, loc.items)
-
-		if #items == 0 then
-			vim.notify("Solo se encontró definición en node_modules", vim.log.levels.WARN)
-			return
-		end
-
-		if #items == 1 then
-			-- un solo resultado -> saltar directo
-			vim.fn.setqflist({}, " ", { title = loc.title, items = items })
-			vim.cmd("cfirst")
-		else
-			-- varios resultados -> quickfix normal
-			vim.fn.setqflist({}, " ", { title = loc.title, items = items })
-			vim.cmd("copen")
-		end
-	end
-end
 -- =========================
 -- KEYMAPS LSP
 -- =========================

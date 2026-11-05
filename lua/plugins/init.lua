@@ -75,21 +75,6 @@ require("lazy").setup({
 		"folke/flash.nvim",
 		event = "VeryLazy",
 	},
-	-- ============ SPECTRE ============
-	{
-		"nvim-pack/nvim-spectre",
-	},
-	-- ============ TREE ============
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- optional, but recommended
-		},
-		lazy = false, -- neo-tree will lazily load itself
-	},
 	-- ============ TMUX ============
 	{
 		"christoomey/vim-tmux-navigator",
@@ -138,7 +123,7 @@ require("lazy").setup({
 			vim.g.no_plugin_maps = true
 		end,
 	},
-	-- ============ MARKDOWN ============
+	-- ============ BUFFERS ============
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
@@ -158,43 +143,11 @@ require("lazy").setup({
 		event = "VeryLazy",
 		opts = {},
 	},
-	-- ============ ERROS ============
+	-- ============ ERRORES ============
 	{
 		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		opts = {},
 		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-		},
 	},
 	-- ============ Jump references, types, implements ============
 	{
@@ -236,6 +189,15 @@ require("lazy").setup({
 			"typescriptreact",
 		},
 	},
+	-- ============ TREE FILES ============
+	{
+		"stevearc/oil.nvim",
+		opts = {
+			lsp_file_methods = { enabled = true, autosave_changes = true },
+		},
+		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+		lazy = false,
+	},
 }, {
 	checker = { enabled = false },
 })
@@ -246,9 +208,12 @@ require("plugins.lsp")
 require("plugins.completion")
 require("plugins.git")
 require("plugins.formatting")
-require("plugins.options")
+require("plugins.fold")
 require("plugins.navigation")
 require("plugins.telescope")
 require("plugins.markdown")
 require("plugins.treesitter")
 require("plugins.goto")
+require("plugins.oil")
+require("plugins.trouble")
+require("plugins.bufferline")

@@ -26,8 +26,7 @@ end
 -- BASICO
 -- =========================
 map("n", "<Leader>w", ":w<CR>", wraperDescription(opts, "Save"))
-map("n", "<Leader>q", ":q<CR>", wraperDescription(opts, "Close"))
-map("n", "q", ":q<CR>", wraperDescription(opts, "Close"))
+map("n", "<leader>q", ":q<CR>", wraperDescription(opts, "Close"))
 map("n", "<leader>-", clearSearchHighlight, wraperDescription(opts, "Clear Search Highlight"))
 map("n", "<C-->", "<C-o>", wraperDescription({ silent = true }, "Back Jump"))
 map("n", "<leader>bw", closeOthersBuffers, wraperDescription(opts, "Close Other Buffers"))
@@ -50,25 +49,3 @@ map("n", "<M-j>", ":resize -2<CR>", opts)
 map("n", "<M-k>", ":resize +2<CR>", opts)
 map("n", "<M-h>", ":vertical resize -2<CR>", opts)
 map("n", "<M-l>", ":vertical resize +2<CR>", opts)
-
--- =========================
--- TREE
--- =========================
-map("n", "<C-e>", ":Neotree filesystem toggle left<cr>", opts)
-map("n", "<C-o>", ":Neotree buffers toggle left<cr>", opts)
-
--- =========================
--- SPECTRE
--- =========================
-map("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-	desc = "Toggle Spectre",
-})
-map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-	desc = "Search current word",
-})
-map("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-	desc = "Search current word",
-})
-map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-	desc = "Search on current file",
-})

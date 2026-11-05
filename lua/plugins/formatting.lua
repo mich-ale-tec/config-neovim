@@ -1,22 +1,19 @@
 local conform = require("conform")
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-
 		go = { "goimports", "gofmt" },
-
 		javascript = { "prettier" },
 		typescript = { "prettier" },
 		javascriptreact = { "prettier" },
 		typescriptreact = { "prettier" },
 		json = { "prettier" },
-
 		bash = { "shfmt" },
 		sh = { "shfmt" },
-
 		ruby = { "rubocop" },
-
 		perl = { "perltidy" },
 	},
 
@@ -26,10 +23,9 @@ conform.setup({
 	},
 })
 
--- keymap manual (opcional pero útil)
-vim.keymap.set({ "n", "v" }, "<leader>p", function()
+map({ "n", "v" }, "<leader>p", function()
 	conform.format({
 		lsp_fallback = true,
 		async = true,
 	})
-end, { desc = "Format file" })
+end, _G.wraperDescription(opts, "Dar formato archivo"))
