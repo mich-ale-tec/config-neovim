@@ -8,12 +8,10 @@ local general = augroup("General", { clear = true })
 
 autocmd("BufReadPost", {
 	group = general,
-	callback = function()
-		local mark = vim.api.nvim_buf_get_mark(0, '"')
-		local line_count = vim.api.nvim_buf_line_count(0)
-
-		if mark[1] > 0 and mark[1] <= line_count then
-			vim.cmd('normal! g`"')
+	callback = function(args)
+		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+		if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
 		end
 	end,
 })
