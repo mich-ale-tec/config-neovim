@@ -107,6 +107,7 @@ require("lazy").setup({
 	{
 		"tpope/vim-fugitive",
 	},
+	{ "sindrets/diffview.nvim" },
 	{
 		"lewis6991/gitsigns.nvim",
 	},

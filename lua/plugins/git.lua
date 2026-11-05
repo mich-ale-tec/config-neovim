@@ -56,6 +56,7 @@ require("gitsigns").setup({
 -- GIT KEYMAPS
 -- =========================
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 map("n", "]h", "<cmd>Gitsigns next_hunk<CR>", {
 	desc = "Next hunk",
@@ -80,3 +81,8 @@ map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>", {
 map("n", "<leader>hb", "<cmd>Gitsigns blame_line<CR>", {
 	desc = "Blame line",
 })
+-- =========================
+-- Diff view
+-- =========================
+map("n","<leader>gd", "<cmd>DiffviewOpen<cr>", _G.wraperDescription(opts, "Open diff view"))
+map("n","<leader>gD", "<cmd>DiffviewClose<cr>", _G.wraperDescription(opts, "Close diff view"))
