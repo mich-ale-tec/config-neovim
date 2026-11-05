@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -7,41 +8,37 @@ _G.wraperDescription = function(opts, desc)
 	})
 end
 
-vim.g.mapleader = " "
 -- =========================
 -- FUNCTIONS
 -- =========================
 local function clearSearchHighlight()
 	vim.cmd("nohlsearch")
 end
-local function closeOthersBuffers()
-	local current = vim.api.nvim_get_current_buf()
-	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
-			vim.api.nvim_buf_delete(buf, { force = true })
-		end
-	end
-end
 -- =========================
 -- BASICO
 -- =========================
-map("n", "<Leader>w", ":w<CR>", wraperDescription(opts, "Save"))
-map("n", "<leader>q", ":q<CR>", wraperDescription(opts, "Close"))
+map("n", "<Leader>w", "<cmd>w<CR>", wraperDescription(opts, "Save"))
+map("n", "<leader>q", "<cmd>q<CR>", wraperDescription(opts, "Close"))
 map("n", "<leader>-", clearSearchHighlight, wraperDescription(opts, "Clear Search Highlight"))
-map("n", "<C-->", "<C-o>", wraperDescription({ silent = true }, "Back Jump"))
-map("n", "<leader>bw", closeOthersBuffers, wraperDescription(opts, "Close Other Buffers"))
 -- =========================
 -- BUFFERS
 -- =========================
 map("n", "<S-l>", ":BufferLineCycleNext<CR>", wraperDescription(opts, "Next Buffer"))
 map("n", "<S-h>", ":BufferLineCyclePrev<CR>", wraperDescription(opts, "Back Buffer"))
-map("n", "<leader>d", ":bdelete<CR>", wraperDescription(opts, "Close Current Buffer"))
-
 -- =========================
--- INSERT ESC
+-- VENTANAS / SPLITS
+-- =========================
+map("n", "<leader>vv", "<C-w>v", wraperDescription(opts, "Split vertical"))
+map("n", "<leader>vs", "<C-w>s", wraperDescription(opts, "Split horizontal"))
+map("n", "<leader>vx", "<cmd>close<cr>", wraperDescription(opts, "Cerrar ventana"))
+map("n", "<leader>vo", "<C-w>o", wraperDescription(opts, "Cerrar las demás ventanas"))
+map("n", "<leader>v=", "<C-w>=", wraperDescription(opts, "Igualar tamaños"))
+map("n", "<leader>vr", "<C-w>r", wraperDescription(opts, "Rotar ventanas"))
+map("n", "<leader>vt", "<C-w>T", wraperDescription(opts, "Mover ventana a una pestaña nueva"))
+-- =========================
+-- EDICION
 -- =========================
 map("i", "jk", "<ESC>", opts)
-
 -- =========================
 -- VENTANAS
 -- =========================

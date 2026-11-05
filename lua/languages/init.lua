@@ -1,0 +1,6 @@
+require("languages.javascript")
+require("languages.go")
+require("languages.ruby")
+require("languages.perl")
+require("languages.bash")
+require("languages.css")

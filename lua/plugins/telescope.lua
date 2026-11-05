@@ -52,7 +52,7 @@ map("n", "gd", builtin.lsp_definitions, _G.wraperDescription(opts, "Go Definitio
 map("n", "gy", builtin.lsp_type_definitions, _G.wraperDescription(opts, "Go Type Definition"))
 map("n", "gi", builtin.lsp_implementations, _G.wraperDescription(opts, "Go Implementation"))
 map("n", "gr", builtin.lsp_references, _G.wraperDescription(opts, "Go References"))
-map("n", "<C-p>", builtin.find_files, { desc = "Find files" })
+map("n", "<C-e>", builtin.find_files, { desc = "Find files" })
 map("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
 map("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
 map("n", "<leader>fh", builtin.help_tags, { desc = "Help Telescope" })
