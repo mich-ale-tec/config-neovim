@@ -199,6 +199,16 @@ require("lazy").setup({
 		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
 		lazy = false,
 	},
+	-- ============ AUTOSESSION ============
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+		},
+	},
 }, {
 	checker = { enabled = false },
 })
@@ -218,3 +228,4 @@ require("plugins.goto")
 require("plugins.oil")
 require("plugins.trouble")
 require("plugins.bufferline")
+require("plugins.sesion")
