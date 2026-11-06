@@ -1,5 +1,6 @@
 -- LAZY.NVIM - Gestor de plugins moderno
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -215,6 +216,14 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- ============ SESION ============
+	{
+		"folke/persistence.nvim",
+		event = "BufReadPre",
+		opts = {
+			branch = true,
+		},
+	},
 }, {
 	checker = { enabled = false },
 })
@@ -234,3 +243,4 @@ require("plugins.goto")
 require("plugins.oil")
 require("plugins.trouble")
 require("plugins.bufferline")
+require("plugins.sesion")
