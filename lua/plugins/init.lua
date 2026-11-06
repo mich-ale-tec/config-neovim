@@ -224,6 +224,12 @@ require("lazy").setup({
 			branch = true,
 		},
 	},
+	-- ============ MACROS ============
+	{
+		"chrisgrieser/nvim-recorder",
+		dependencies = "rcarriga/nvim-notify",
+		opts = {},
+	},
 }, {
 	checker = { enabled = false },
 })
