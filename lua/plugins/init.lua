@@ -17,9 +17,6 @@ require("lazy").setup({
 	-- ============ LSP ============
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-		},
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
@@ -31,21 +28,40 @@ require("lazy").setup({
 	},
 	-- ============ COMPLETION ============
 	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-		},
-	},
-	{
 		"benfowler/telescope-luasnip.nvim",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"L3MON4D3/LuaSnip",
+		},
+	},
+	{
+		"saghen/blink.cmp",
+		version = "1.*",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"L3MON4D3/LuaSnip",
+		},
+		opts = {
+			keymap = {
+				preset = "enter",
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+			},
+			snippets = { preset = "luasnip" },
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 300 },
+			},
+			sources = {
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						score_offset = 100,
+					},
+				},
+			},
+			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
 	},
 	-- ============ THEME ============
@@ -86,7 +102,6 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
 		},
-		build = "make",
 	},
 	-- ============ NOICE ============
 	{
@@ -181,15 +196,6 @@ require("lazy").setup({
 		"numToStr/Comment.nvim",
 		config = true,
 	},
-	{
-		"mattn/emmet-vim",
-		ft = {
-			"html",
-			"css",
-			"javascriptreact",
-			"typescriptreact",
-		},
-	},
 	-- ============ TREE FILES ============
 	{
 		"stevearc/oil.nvim",
@@ -199,14 +205,14 @@ require("lazy").setup({
 		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
 		lazy = false,
 	},
-	-- ============ AUTOSESSION ============
+	-- ============ DEV ============
 	{
-		"rmagatti/auto-session",
-		lazy = false,
-		---@module "auto-session"
-		---@type AutoSession.Config
+		"folke/lazydev.nvim",
+		ft = "lua",
 		opts = {
-			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
 		},
 	},
 }, {
@@ -218,7 +224,7 @@ require("plugins.ui")
 require("plugins.lsp")
 require("plugins.completion")
 require("plugins.git")
-require("plugins.formatting")
+require("plugins.conform")
 require("plugins.fold")
 require("plugins.navigation")
 require("plugins.telescope")
@@ -228,4 +234,3 @@ require("plugins.goto")
 require("plugins.oil")
 require("plugins.trouble")
 require("plugins.bufferline")
-require("plugins.sesion")

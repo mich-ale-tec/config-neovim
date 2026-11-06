@@ -25,14 +25,7 @@ telescope.setup({
 
 		sorting_strategy = "ascending",
 
-		file_ignore_patterns = {
-			"node_modules",
-			".git",
-			"dist",
-			"build",
-			".idea",
-			"log*",
-		},
+		file_ignore_patterns = { "node_modules/", "%.git/", "dist/", "build/", "%.idea/", "%.log$" },
 
 		mappings = {
 			i = {
@@ -46,9 +39,15 @@ telescope.setup({
 })
 
 -- =========================
+-- FUNCTION
+-- =========================
+local function GoToDefinition()
+	builtin.lsp_definitions({ reuse_win = true })
+end
+-- =========================
 -- KEYSMAPS
 -- =========================
-map("n", "gd", builtin.lsp_definitions, _G.wraperDescription(opts, "Go Definition"))
+map("n", "gd", GoToDefinition, _G.wraperDescription(opts, "Go Definition"))
 map("n", "gy", builtin.lsp_type_definitions, _G.wraperDescription(opts, "Go Type Definition"))
 map("n", "gi", builtin.lsp_implementations, _G.wraperDescription(opts, "Go Implementation"))
 map("n", "gr", builtin.lsp_references, _G.wraperDescription(opts, "Go References"))

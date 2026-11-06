@@ -1,40 +1,13 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-
-local js_group = augroup("JavaScriptConfig", { clear = true })
-
-autocmd("FileType", {
-	group = js_group,
-	pattern = {
-		"javascript",
-		"typescript",
-		"javascriptreact",
-		"typescriptreact",
-		"jsx",
-		"tsx",
-		"svelte",
-	},
-	callback = function()
-		vim.treesitter.start(0)
-		vim.opt_local.tabstop = 2
-		vim.opt_local.shiftwidth = 2
-		vim.opt_local.softtabstop = 2
-		vim.opt_local.expandtab = true
-	end,
-})
-
-vim.lsp.config("ts_ls", {
-	cmd = { "typescript-language-server", "--stdio" },
+vim.lsp.config("vtsls", {
+	cmd = { "vtsls", "--stdio" },
 	filetypes = {
 		"typescript",
 		"typescriptreact",
 		"javascript",
 		"javascriptreact",
 	},
-	capabilities = capabilities,
 })
-vim.lsp.enable("ts_ls")
+vim.lsp.enable("vtsls")
 
 vim.lsp.config("svelte", {
 	cmd = {
@@ -44,6 +17,5 @@ vim.lsp.config("svelte", {
 	filetypes = {
 		"svelte",
 	},
-	capabilities = capabilities,
 })
 vim.lsp.enable("svelte")

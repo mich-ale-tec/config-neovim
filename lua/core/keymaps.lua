@@ -2,9 +2,11 @@ vim.g.mapleader = " "
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-_G.wraperDescription = function(opts, desc)
+---@param opts vim.keymap.set.Opts
+---@param descripcion string
+_G.wraperDescription = function(opts, descripcion)
 	return vim.tbl_extend("force", opts, {
-		desc = desc,
+		desc = descripcion,
 	})
 end
 
@@ -25,16 +27,6 @@ map("n", "<leader>-", clearSearchHighlight, wraperDescription(opts, "Clear Searc
 -- =========================
 map("n", "<S-l>", ":BufferLineCycleNext<CR>", wraperDescription(opts, "Next Buffer"))
 map("n", "<S-h>", ":BufferLineCyclePrev<CR>", wraperDescription(opts, "Back Buffer"))
--- =========================
--- VENTANAS / SPLITS
--- =========================
-map("n", "<leader>vv", "<C-w>v", wraperDescription(opts, "Split vertical"))
-map("n", "<leader>vs", "<C-w>s", wraperDescription(opts, "Split horizontal"))
-map("n", "<leader>vx", "<cmd>close<cr>", wraperDescription(opts, "Cerrar ventana"))
-map("n", "<leader>vo", "<C-w>o", wraperDescription(opts, "Cerrar las demás ventanas"))
-map("n", "<leader>v=", "<C-w>=", wraperDescription(opts, "Igualar tamaños"))
-map("n", "<leader>vr", "<C-w>r", wraperDescription(opts, "Rotar ventanas"))
-map("n", "<leader>vt", "<C-w>T", wraperDescription(opts, "Mover ventana a una pestaña nueva"))
 -- =========================
 -- EDICION
 -- =========================

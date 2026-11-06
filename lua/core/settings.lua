@@ -7,6 +7,11 @@ vim.opt.numberwidth = 2
 vim.opt.cursorline = true
 vim.opt.ruler = true
 vim.opt.laststatus = 3
+vim.opt.scrolloff = 8
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.updatetime = 250
+vim.opt.confirm = true
 -- =========================
 -- MOUSE
 -- =========================
