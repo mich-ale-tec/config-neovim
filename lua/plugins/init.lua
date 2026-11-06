@@ -1,4 +1,3 @@
--- LAZY.NVIM - Gestor de plugins moderno
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -200,9 +199,6 @@ require("lazy").setup({
 	-- ============ TREE FILES ============
 	{
 		"stevearc/oil.nvim",
-		opts = {
-			lsp_file_methods = { enabled = true, autosave_changes = true },
-		},
 		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
 		lazy = false,
 	},
@@ -229,6 +225,19 @@ require("lazy").setup({
 		"chrisgrieser/nvim-recorder",
 		dependencies = "rcarriga/nvim-notify",
 		opts = {},
+	},
+	-- ============ EXPLORER ============
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = {
+			explorer = { enabled = true },
+			quickfile = { enabled = true },
+			scroll = { enabled = true },
+			statuscolumn = { enabled = true },
+			picker = { enabled = true },
+		},
 	},
 }, {
 	checker = { enabled = false },

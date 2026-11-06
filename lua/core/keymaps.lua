@@ -38,3 +38,12 @@ map("n", "<M-j>", ":resize -2<CR>", opts)
 map("n", "<M-k>", ":resize +2<CR>", opts)
 map("n", "<M-h>", ":vertical resize -2<CR>", opts)
 map("n", "<M-l>", ":vertical resize +2<CR>", opts)
+-- =========================
+-- TREE
+-- =========================
+map("n", "<leader>fe", function()
+	Snacks.explorer()
+end, wraperDescription(opts, "Explorer (abrir/cerrar)"))
+map("n", "<leader>fE", function()
+	Snacks.explorer.reveal()
+end, wraperDescription(opts, "Explorer en el archivo actual"))
