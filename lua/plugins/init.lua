@@ -12,197 +12,57 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- ============ PLUGINS ============
+local lsp = require("plugins.lsp.install")
+local telescope = require("plugins.telescope.install")
+local blink = require("plugins.blink.install")
+local gruvbox = require("plugins.gruvbox.install")
+local lualine = require("plugins.lualine.install")
+local indent = require("plugins.indent.install")
+local flash = require("plugins.flash.install")
+local tmux = require("plugins.tmux.install")
+local noice = require("plugins.noice.install")
+local explorer = require("plugins.explorer.install")
+local git = require("plugins.git.install")
+local treesitter = require("plugins.treesitter.install")
+local utils = require("plugins.utils.install")
+local bufferline = require("plugins.bufferline.install")
+local sesion = require("plugins.sesion.install")
+local wichkey = require("plugins.wichkey.install")
+local conform = require("plugins.conform.install")
+
 require("lazy").setup({
-	-- ============ LSP ============
-	{
-		"neovim/nvim-lspconfig",
-	},
-	{
-		"mason-org/mason-lspconfig.nvim",
-		opts = {},
-		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-			"neovim/nvim-lspconfig",
-		},
-	},
-	-- ============ COMPLETION ============
-	{
-		"benfowler/telescope-luasnip.nvim",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"L3MON4D3/LuaSnip",
-		},
-	},
-	{
-		"saghen/blink.cmp",
-		version = "1.*",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-			"L3MON4D3/LuaSnip",
-		},
-		opts = {
-			keymap = {
-				preset = "enter",
-				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-			},
-			snippets = { preset = "luasnip" },
-			completion = {
-				documentation = { auto_show = true, auto_show_delay_ms = 300 },
-			},
-			sources = {
-				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-				providers = {
-					lazydev = {
-						name = "LazyDev",
-						module = "lazydev.integrations.blink",
-						score_offset = 100,
-					},
-				},
-			},
-			fuzzy = { implementation = "prefer_rust_with_warning" },
-		},
-	},
-	-- ============ THEME ============
-	{
-		"loctvl842/monokai-pro.nvim",
-		lazy = false,
-		priority = 1000,
-	},
-	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
-	-- ============ LUA LINE ============
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
-	-- ============ PANTALLA INICIO ============
-	{
-		"goolord/alpha-nvim",
-	},
-	-- ============ IDENTACION ============
-	{
-		"lukas-reineke/indent-blankline.nvim",
-	},
-	-- ============ FLASH ============
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-	},
-	-- ============ TMUX ============
-	{
-		"christoomey/vim-tmux-navigator",
-	},
-	-- ============ TELESCOPE ============
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-fzf-native.nvim",
-		},
-	},
-	-- ============ NOICE ============
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {},
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-	},
-	-- ============ TELESCOP - FZF ============
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
-	},
-	-- ============ GIT ============
-	{
-		"tpope/vim-fugitive",
-	},
-	{ "sindrets/diffview.nvim" },
-	{
-		"lewis6991/gitsigns.nvim",
-	},
-	-- ============ Tressitter ============
-	{
-		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
-		build = ":TSUpdate",
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		branch = "main",
-		init = function()
-			vim.g.no_plugin_maps = true
-		end,
-	},
-	-- ============ BUFFERS ============
-	{
-		"akinsho/bufferline.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-	},
-	-- ============ MARKDOWN ============
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-	},
-	-- ============ WHICH KEY ============
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-	},
-	-- ============ MARKS ============
-	{
-		"chentoast/marks.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
-	-- ============ ERRORES ============
-	{
-		"folke/trouble.nvim",
-		opts = {},
-		cmd = "Trouble",
-	},
-	-- ============ Jump references, types, implements ============
-	{
-		"rmagatti/goto-preview",
-		dependencies = { "rmagatti/logger.nvim" },
-		event = "BufEnter",
-		config = true,
-	},
-	-- ============ Conform ============
-	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-	},
-	-- ============ EDITING ============
-	{
-		"kylechui/nvim-surround",
-		version = "*",
-		event = "VeryLazy",
-		config = true,
-	},
-	{
-		"tpope/vim-repeat",
-	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
-	{
-		"numToStr/Comment.nvim",
-		config = true,
-	},
-	-- ============ TREE FILES ============
-	{
-		"stevearc/oil.nvim",
-		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
-		lazy = false,
-	},
-	-- ============ DEV ============
+	lsp.nvim,
+	lsp.mason,
+	lsp.trouble,
+    lsp.goto,
+	telescope.luasnip,
+	telescope.main,
+	telescope.fzf,
+	blink.main,
+	gruvbox.main,
+	lualine.main,
+	indent.main,
+	flash.main,
+	tmux.main,
+	noice.main,
+	explorer.oil,
+	explorer.snacks,
+	git.fugitive,
+	git.diffview,
+	git.signs,
+	treesitter.nvim,
+	treesitter.textobjects,
+	bufferline.main,
+	utils.marks,
+	utils.surround,
+	utils.vim_repeat,
+	utils.autopairs,
+	utils.comment,
+	utils.recorder,
+	utils.markdown,
+	sesion.save,
+    wichkey.main,
+    conform.main,
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
@@ -212,50 +72,26 @@ require("lazy").setup({
 			},
 		},
 	},
-	-- ============ SESION ============
-	{
-		"folke/persistence.nvim",
-		event = "BufReadPre",
-		opts = {
-			branch = true,
-		},
-	},
-	-- ============ MACROS ============
-	{
-		"chrisgrieser/nvim-recorder",
-		dependencies = "rcarriga/nvim-notify",
-		opts = {},
-	},
-	-- ============ EXPLORER ============
-	{
-		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
-		opts = {
-			explorer = { enabled = true },
-			quickfile = { enabled = true },
-			scroll = { enabled = true },
-			statuscolumn = { enabled = true },
-			picker = { enabled = true },
-		},
-	},
 }, {
 	checker = { enabled = false },
 })
 
-require("plugins.interface")
-require("plugins.ui")
-require("plugins.lsp")
-require("plugins.completion")
-require("plugins.git")
-require("plugins.conform")
-require("plugins.fold")
-require("plugins.navigation")
-require("plugins.telescope")
-require("plugins.markdown")
-require("plugins.treesitter")
-require("plugins.goto")
-require("plugins.oil")
-require("plugins.trouble")
-require("plugins.bufferline")
-require("plugins.sesion")
+require("plugins.lualine.settings")
+require("plugins.indent.settings")
+require("plugins.wichkey.settings")
+require("plugins.gruvbox.settings")
+require("plugins.lsp.settings")
+require("plugins.telescope.luasnip")
+require("plugins.git.signs")
+require("plugins.conform.settings")
+require("plugins.utils.fold")
+require("plugins.flash.keymaps")
+require("plugins.telescope.settings")
+require("plugins.bufferline.settings")
+require("plugins.treesitter.keymaps")
+require("plugins.lsp.goto")
+require("plugins.explorer.oil")
+require("plugins.lsp.trouble")
+require("plugins.bufferline.keymaps")
+require("plugins.sesion.settings")
+
