@@ -29,6 +29,7 @@ local bufferline = require("plugins.bufferline.install")
 local sesion = require("plugins.sesion.install")
 local wichkey = require("plugins.wichkey.install")
 local conform = require("plugins.conform.install")
+local testing = require("plugins.testing.install")
 
 require("lazy").setup({
 	lsp.nvim,
@@ -60,18 +61,18 @@ require("lazy").setup({
 	utils.comment,
 	utils.recorder,
 	utils.markdown,
+	utils.todo,
+	utils.autotag,
+	utils.iluminate,
 	sesion.save,
     wichkey.main,
     conform.main,
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
-	},
+    -- Probando plugins
+    testing.devlua,
+    testing.yanki,
+    testing.spider,
+    testing.substitute,
+    testing.harpoon
 }, {
 	checker = { enabled = false },
 })
@@ -94,4 +95,5 @@ require("plugins.explorer.oil")
 require("plugins.lsp.trouble")
 require("plugins.bufferline.keymaps")
 require("plugins.sesion.settings")
+require("plugins.testing.keymaps")
 

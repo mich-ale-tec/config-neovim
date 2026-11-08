@@ -41,15 +41,3 @@ map("n", "<Leader>rn", vim.lsp.buf.rename, _G.wraperDescription(opts, "Variable 
 map({ "n", "x" }, "<Leader>a", vim.lsp.buf.code_action, _G.wraperDescription(opts, "Code Actions"))
 map("n", "K", showPreviewSign, _G.wraperDescription(opts, "Show Preview Sign"))
 map({ "n" }, "<leader>t", showSign, _G.wraperDescription(opts, "Show Sign"))
-
-local function showDiagnostic()
-	vim.diagnostic.open_float({
-		border = "rounded",
-		focus = false,
-		source = true,
-	})
-end
--- =========================
--- DIAGNOSTIC
--- =========================
-map("n", "<leader>e", showDiagnostic, _G.wraperDescription(opts, "Diagnostic Open Float"))

@@ -30,4 +30,15 @@ return {
 	markdown = {
 		"MeanderingProgrammer/render-markdown.nvim",
 	},
+	todo = {
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+	autotag = {
+		"windwp/nvim-ts-autotag",
+	},
+	iluminate = {
+		"RRethy/vim-illuminate",
+	},
 }
