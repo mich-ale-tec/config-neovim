@@ -30,6 +30,7 @@ local sesion = require("plugins.sesion.install")
 local wichkey = require("plugins.wichkey.install")
 local conform = require("plugins.conform.install")
 local testing = require("plugins.testing.install")
+local grugfar = require("plugins.grugfar.install")
 
 require("lazy").setup({
 	lsp.nvim,
@@ -39,9 +40,9 @@ require("lazy").setup({
 	telescope.luasnip,
 	telescope.main,
 	telescope.fzf,
-	blink.main,
-	gruvbox.main,
-	lualine.main,
+	blink,
+	gruvbox,
+	lualine,
 	indent.main,
 	flash.main,
 	tmux.main,
@@ -65,15 +66,17 @@ require("lazy").setup({
 	utils.autotag,
 	utils.iluminate,
 	sesion.save,
-    wichkey.main,
-    conform.main,
+    wichkey,
+    conform,
+    grugfar,
     -- Probando plugins
     testing.devlua,
     testing.yanki,
     testing.spider,
     testing.substitute,
     testing.harpoon
-}, {
+},
+{
 	checker = { enabled = false },
 })
 
@@ -96,4 +99,5 @@ require("plugins.lsp.trouble")
 require("plugins.bufferline.keymaps")
 require("plugins.sesion.settings")
 require("plugins.testing.keymaps")
+require("plugins.grugfar.keymaps")
 

@@ -1,6 +1,4 @@
 return {
-	main = {
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-	},
+	"stevearc/conform.nvim",
+	event = { "BufWritePre" },
 }
